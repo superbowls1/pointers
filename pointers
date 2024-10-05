@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <stdlib.h>
+//joey slepski lab 5 pointers
+void printarray(int students, int exams, int grades[students][exams]);
+void minimum(int students, int exams, int grades[students][exams]);
+void maximum(int students, int exams, int grades[students][exams]);
+void average(int students, int exams, int grades[students][exams]);
+
+int main()
+{
+    int students=0;
+    int exams=0;
+   
+    printf("How many students took the test\n");
+    scanf("%d", &students);
+    printf("How many exams\n");
+    scanf("%d", &exams);
+    int grades[students][exams];
+    printf("Enter the grades for the amount of students\n");
+    for(int i=0; i<students; i++){
+        for(int j=0; j<exams; j++){
+            printf("Student %d, Exam %d: ", i+1, j+1);
+        scanf("%d", &grades[i][j]);
+    }
+    
+    }
+    void (*processGrade[4])(int, int, int[students][exams])= {printarray, minimum, maximum, average};
+    
+    
+        
+    
+    
+    int choice =0;
+    do{
+    
+    printf("Enter a choice:\n");
+    printf("0 Print the array of grades\n");
+    printf("1 Find the min grade \n");
+    printf("2 Find the max grade\n");
+    printf("3 Print the average on all tests for each student\n");
+    printf("4 End program\n");
+    scanf("%d", &choice);
+    switch(choice){
+        case 0:
+        printarray(students, exams, grades);
+        break;
+        case 1:
+        minimum(students, exams, grades);
+        break;
+        case 2:
+        maximum(students, exams, grades);
+        break;
+        case 3:
+        average(students, exams, grades);
+        break;
+        case 4:
+        printf("end program");
+        break;
+        default:
+        printf("Not a chocie");
+        
+    }
+    } while(choice!=4);
+    
+    
+
+    return 0;
+}
+
+void printarray(int students, int exams, int grades[students][exams]){
+    printf("Array: ");
+    for(int i=0; i< students; i++){
+        for(int j=0; j< exams; j++){
+            printf("%d", grades[i][j]);
+        }
+        printf("\n");
+    }
+    
+}
+void minimum(int students, int exams, int grades[students][exams]){
+
+    int min= grades[0][0];
+    for(int i=0; i<students; i++){
+        for(int j=0; j<exams; j++){
+            if(grades[i][j] <min){
+                min= grades[i][j];
+            }
+        }
+    }
+    printf("Minimum grade is: %d\n", min);
+}
+void maximum(int students, int exams, int grades[students][exams]){
+    int max= grades[0][0];
+    for(int i=0; i <students; i++){
+        for(int j=0; j<exams; j++){
+            if(grades[i][j] >max){
+                max= grades[i][j];
+            }
+        }
+    }
+    printf("Maximum grade %d\n", max);
+}
+void average(int students, int exams, int grades[students][exams]){
+    for(int i=0; i<students; i++){
+        int total=0;
+        for(int j=0; j<exams; j++){
+            total+=grades[i][j];
+        }
+        printf ("Average student  %.2f\n", (float)total/exams);
+        
+    }
+}
+
